@@ -5,7 +5,7 @@ export default function Home() {
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
         <nav className="flex flex-col items-center gap-6">
         <span className="font-mono text-xs tracking-widest text-yellow-600 dark:text-yellow-500 mb-2">
-          ◈ RAG STUDIO
+          ◈ KARU RAG STUDIO
         </span>
           <Link
               href="/upload"

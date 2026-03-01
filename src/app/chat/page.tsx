@@ -114,7 +114,7 @@ export default function ChatPage() {
     return (
         <main className="chat-root">
             <nav className="nav">
-                <span className="logo">◈ RAG STUDIO</span>
+                <span className="logo">◈ KARU STUDIO</span>
                 <div className="nav-links">
                     <Link href="/upload" className="nav-link">Upload</Link>
                     <span className="nav-active">Chat</span>

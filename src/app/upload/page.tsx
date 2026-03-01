@@ -78,7 +78,7 @@ export default function UploadPage() {
     return (
         <main className="upload-root">
             <nav className="nav">
-                <span className="logo">◈ RAG STUDIO</span>
+                <span className="logo">◈ KARU STUDIO</span>
                 <div className="nav-links">
                     <span className="nav-active">Upload</span>
                     <Link href="/chat" className="nav-link">Chat</Link>
