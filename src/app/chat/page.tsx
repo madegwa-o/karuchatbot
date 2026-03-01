@@ -11,6 +11,8 @@ interface Message {
     streaming?: boolean;
 }
 
+const BASE_URL = process.env.BASE_BACKEND_URL
+
 export default function ChatPage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
@@ -54,7 +56,7 @@ export default function ChatPage() {
         setMessages((prev) => [...prev, userMsg, assistantMsg]);
 
         try {
-            const res = await fetch("http://localhost:8000/ask-stream", {
+            const res = await fetch(`${BASE_URL}/ask-stream`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ query }),
@@ -83,11 +85,17 @@ export default function ChatPage() {
                     m.id === assistantId ? { ...m, streaming: false } : m
                 )
             );
-        } catch (e) {
+        } catch (e: unknown) {
+            let message = "Something went wrong";
+
+            if (e instanceof Error) {
+                message = e.message;
+            }
+
             setMessages((prev) =>
                 prev.map((m) =>
                     m.id === assistantId
-                        ? { ...m, content: `Error: ${e.message}`, streaming: false }
+                        ? { ...m, content: `Error: ${message}`, streaming: false }
                         : m
                 )
             );

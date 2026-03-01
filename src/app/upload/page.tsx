@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import React, {DragEvent, useState, useCallback } from "react";
 import Link from "next/link";
 
 const BASE_URL = process.env.BASE_BACKEND_URL
@@ -24,7 +24,7 @@ export default function UploadPage() {
         });
     };
 
-    const onDrop = useCallback((e: React.DragEvent) => {
+    const onDrop = useCallback((e: DragEvent) => {
         e.preventDefault();
         setDragging(false);
         addFiles(e.dataTransfer.files);
@@ -43,7 +43,7 @@ export default function UploadPage() {
             try {
                 const fd = new FormData();
                 fd.append("file", file);
-                const r = await fetch("http://localhost:8000/upload", {
+                const r = await fetch(`${BASE_URL}/upload`, {
                     method: "POST",
                     body: fd,
                 });
@@ -53,8 +53,20 @@ export default function UploadPage() {
                     const j = await r.json().catch(() => ({}));
                     res.push({ name: file.name, status: "err", msg: j.detail || r.statusText });
                 }
-            } catch (e) {
-                res.push({ name: file.name, status: "err", msg: e.message });
+            } catch (e: unknown) {
+                let message = "Upload failed";
+
+                if (e instanceof Error) {
+                    message = e.message;
+                } else if (typeof e === "string") {
+                    message = e;
+                }
+
+                res.push({
+                    name: file.name,
+                    status: "err",
+                    msg: message,
+                });
             }
         }
 
