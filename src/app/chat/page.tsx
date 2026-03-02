@@ -11,7 +11,7 @@ interface Message {
     streaming?: boolean;
 }
 
-const BASE_URL = process.env.BASE_BACKEND_URL
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_BACKEND_URL
 
 export default function ChatPage() {
     const [messages, setMessages] = useState<Message[]>([]);

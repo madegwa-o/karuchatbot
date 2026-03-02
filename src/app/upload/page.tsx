@@ -3,7 +3,7 @@
 import React, {DragEvent, useState, useCallback } from "react";
 import Link from "next/link";
 
-const BASE_URL = process.env.BASE_BACKEND_URL
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_BACKEND_URL
 
 export default function UploadPage() {
     const [files, setFiles] = useState<File[]>([]);
